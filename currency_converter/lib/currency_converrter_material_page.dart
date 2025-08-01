@@ -1,12 +1,25 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
-class CurrencyConverrterMaterialPage extends StatelessWidget {
+class CurrencyConverrterMaterialPage extends StatefulWidget {
   const CurrencyConverrterMaterialPage({super.key});
+  @override
+  State createState() => _CurrencyConverrterMaterialPageState();
+}
+
+class _CurrencyConverrterMaterialPageState extends State {
+  String? result = '';
+  final TextEditingController textEditingCon = TextEditingController();
+
+  @override
+  void dispose() {
+    textEditingCon.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('rebuilt');
+    debugPrint(result.toString());
     final border = OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
       borderSide: BorderSide(
@@ -17,21 +30,33 @@ class CurrencyConverrterMaterialPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.blueGrey,
+      appBar: AppBar(
+        backgroundColor: Colors.blueGrey,
+        elevation: 0,
+        title: Text(
+          'Converter',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              '0',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 50,
-                fontWeight: FontWeight.bold,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Text(
+                result.toString(),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 50,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
+                controller: textEditingCon,
                 style: const TextStyle(
                   color: Colors.black,
                   fontSize: 20,
@@ -61,25 +86,34 @@ class CurrencyConverrterMaterialPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               child: ElevatedButton(
                 onPressed: () {
-                  debugPrint('hi you stupid idiot clicked the button');
+                  setState(() {
+                    if (textEditingCon.text != '' &&
+                        result.toString().length <= 11) {
+                      double calculation =
+                          double.parse(textEditingCon.text) * 0.81;
+                      result = calculation.toStringAsFixed(2) + '€';
+                    }
+                    if (result.toString().length > 11) {
+                      result = 'Val to High';
+                    }
+                    if (textEditingCon.text == '') {
+                      result = 'Val null';
+                    }
+                    textEditingCon.text = '';
+                  });
                 },
-                style: ButtonStyle(
-                  elevation: WidgetStatePropertyAll(10),
-                  backgroundColor: WidgetStatePropertyAll(Colors.black),
-                  shape: WidgetStatePropertyAll(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadiusGeometry.all(
-                        Radius.circular(10),
-                      ),
+                style: ElevatedButton.styleFrom(
+                  elevation: 5, //only for a elevator buttons
+                  backgroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadiusGeometry.all(
+                      Radius.circular(10),
                     ),
                   ),
-                  foregroundColor: WidgetStatePropertyAll(Colors.white),
-                  padding: WidgetStatePropertyAll(
-                    EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                  ),
-                  minimumSize: WidgetStatePropertyAll(
-                    Size(double.infinity, 10),
-                  ),
+                  foregroundColor: Colors.white,
+                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+
+                  minimumSize: const Size(double.infinity, 10),
                 ),
                 child: Text('Convert'),
               ),
