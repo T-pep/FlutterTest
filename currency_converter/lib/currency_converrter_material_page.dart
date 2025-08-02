@@ -22,10 +22,7 @@ class _CurrencyConverrterMaterialPageState extends State {
     debugPrint(result.toString());
     final border = OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
-      borderSide: BorderSide(
-        color: Colors.black,
-        width: 2.5,
-      ),
+      borderSide: BorderSide(color: Colors.black, width: 2.5),
     );
 
     return Scaffold(
@@ -33,10 +30,7 @@ class _CurrencyConverrterMaterialPageState extends State {
       appBar: AppBar(
         backgroundColor: Colors.blueGrey,
         elevation: 0,
-        title: Text(
-          'Converter',
-          style: TextStyle(color: Colors.white),
-        ),
+        title: Text('Converter', style: TextStyle(color: Colors.white)),
       ),
       body: Center(
         child: Column(
@@ -106,9 +100,7 @@ class _CurrencyConverrterMaterialPageState extends State {
                   elevation: 5, //only for a elevator buttons
                   backgroundColor: Colors.black,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadiusGeometry.all(
-                      Radius.circular(10),
-                    ),
+                    borderRadius: BorderRadiusGeometry.all(Radius.circular(10)),
                   ),
                   foregroundColor: Colors.white,
                   padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
