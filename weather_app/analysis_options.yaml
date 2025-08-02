@@ -7,6 +7,9 @@
 
 # The following line activates a set of recommended lints for Flutter apps,
 # packages, and plugins designed to encourage good coding practices.
+formatter:
+  trailing_commas: preserve # Diese Linie habe ich selber (Tim Breining) hinzugefühgt damit der Code beim Formatieren in mehreren Linien bleibt und nicht mehrere Linien in eine zusammengefasst werden. Dies hat Swbi mihr gezeigt (Whats App chat mit Sebastian)
+
 include: package:flutter_lints/flutter.yaml
 
 linter:
