@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: WeatherScreen(),
-      theme: ThemeData.dark(),
+      theme: ThemeData.dark(useMaterial3: true),
     );
   }
 }

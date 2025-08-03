@@ -17,12 +17,14 @@ class HourlyForecastItem extends StatelessWidget {
       width: 130,
       child: Card(
         elevation: 6,
-        color: Color.fromARGB(255, 48, 43, 57),
+
         child: Column(
           children: [
             SizedBox(height: 5),
             Text(
               time,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
